@@ -87,8 +87,8 @@ figure; montage({im_bg, im_obj, mask_s, result1});
 
 
 %%%%% your own images
-im_bg = im2double(imread('apple.jpeg'));        % background image
-im_obj = im2double(imread('orange.jpeg'));       % source image
+im_bg = im2double(imread('hand.jpeg'));        % background image
+im_obj = im2double(imread('eye.jpeg'));       % source image
 
 % % Get source region mask (extracted object) from the user
 % %  First draw a polygon on the source image for applying the mask
@@ -97,8 +97,8 @@ im_obj = im2double(imread('orange.jpeg'));       % source image
 disp("Copy the values of the vectors poly_x and poly_y from the " + ...
     "Command Window below and hard code them inside your code for " + ...
     "submission via the Grader website.");
-poly_x        % display x coords of polygon
-poly_y        % display y coords of polygon
+poly_x =  [55.271634615384627,78.074519230769241,97.747596153846175,1.285985576923077e+02,1.661562500000000e+02,2.189158653846154e+02,2.618389423076923e+02,3.137043269230769e+02,3.463437500000000e+02,3.794302884615385e+02,4.008918269230769e+02,4.241418269230769e+02,4.304014423076923e+02,3.968677884615385e+02,3.633341346153846e+02,3.221995192307692e+02,2.841947115384615e+02,2.265168269230769e+02,1.755456730769231e+02,1.285985576923077e+02,92.382211538461561,56.165865384615401,26.656250000000000];   % display x coords of polygon
+poly_y = [1.941009615384615e+02,1.672740384615384e+02,1.520721153846154e+02,1.239038461538461e+02,99.759615384615358,82.769230769230703,66.225961538461490,70.249999999999943,77.403846153846132,93.052884615384585,1.064663461538461e+02,1.225625000000000e+02,1.391057692307692e+02,1.484951923076923e+02,1.815817307692307e+02,2.021490384615384e+02,2.204807692307692e+02,2.312115384615385e+02,2.276346153846154e+02,2.218221153846154e+02,2.142211538461538e+02,2.030432692307692e+02,2.061730769230769e+02,1.941009615384615e+02];        % display y coords of polygon
 % Once you have these coordinates, comment out the call to getPolygonForMask() 
 % and hard code the coordinates instead.
 
@@ -111,8 +111,8 @@ objmask = poly2mask(poly_x, poly_y, size(im_obj, 1), size(im_obj, 2));
 disp("Copy the values of center_x and bottom_y from the " + ...
     "Command Window below and hard code them inside your code for " + ...
     "submission via the Grader website.");
-center_x        % display x coord where center of object should be placed
-bottom_y        % display y coord where bottom of object should be placed
+center_x = 518.0114;        % display x coord where center of object should be placed
+bottom_y = 541.0615;        % display y coord where bottom of object should be placed
 % Once you have these coordinates, comment out the call to getBottomCenterLoc()
 % and hard code the coordinates instead.
 
