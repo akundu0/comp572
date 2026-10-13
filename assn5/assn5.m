@@ -87,8 +87,8 @@ figure; montage({im_bg, im_obj, mask_s, result1});
 
 
 %%%%% your own images
-im_bg = im2double(imread('..'));        % background image
-im_obj = im2double(imread('..'));       % source image
+im_bg = im2double(imread('apple.jpeg'));        % background image
+im_obj = im2double(imread('orange.jpeg'));       % source image
 
 % % Get source region mask (extracted object) from the user
 % %  First draw a polygon on the source image for applying the mask
@@ -128,6 +128,7 @@ figure; montage({im_bg, im_obj, mask_s, result2});
 
 
 % REPEAT ABOVE FOR IMAGE SET 3
+
 % REPEAT ABOVE FOR IMAGE SET 4
 % REPEAT ABOVE FOR IMAGE SET 5
 
