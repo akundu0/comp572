@@ -87,8 +87,8 @@ figure; montage({im_bg, im_obj, mask_s, result1});
 
 
 %%%%% your own images
-im_bg = im2double(imread('mountain.png'));        % background image
-im_obj = im2double(imread('dog.jpg'));       % source image
+im_bg = im2double(imread('lilypads.jpeg'));        % background image
+im_obj = im2double(imread('lotus.jpeg'));       % source image
 
 % % Get source region mask (extracted object) from the user
 % %  First draw a polygon on the source image for applying the mask
