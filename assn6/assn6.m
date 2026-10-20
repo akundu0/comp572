@@ -82,7 +82,7 @@ figure; montage({set1_near, set1_far, set1_hybrid, viewed_from_afar}, 'Size', [2
 % -------------------------------------------------------------------------
 
 
-set2_far = im2double(imread('fish.jpeg')); 		        % "far" picture
+set2_far = im2double(imread('fish.jpg')); 		        % "far" picture
 set2_near = im2double(imread('shark.jpg')); 	    		% "near" picture
 % (Optional) convert images to grayscale
 % set2_far = rgb2gray(set2_far);                
@@ -90,18 +90,123 @@ set2_near = im2double(imread('shark.jpg')); 	    		% "near" picture
 
 % Interactively get two pairs of points from each image to establish
 % alignment.
-[x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+% [x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+
 % Once you have these coordinates, comment out call to the interactive
 % function above and hard code the coordinates instead.
-% x1 = ..; y1 = ..;
-% x2 = ..; y2 = ..;
+x1 = [8.390197268588771e+02;3.783216995447648e+02];
+y1 = [3.949726858877087e+02;1.934172989377845e+02];
+x2 = [8.226153846153848e+02;6.010769230769231e+02]; 
+y2 = [3.179615384615384e+02;1.068076923076922e+02];
 
 [set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
 
 % Choose the cutoff frequencies for the low-pass and high-pass filters
 % CHOOSE CAREFULLY!  Values will depend on the images used!
-cutoff_low  = {5, 10, 15, 25};   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
-cutoff_high = {5, 10, 20, 30};   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
+cutoff_low  = 20;   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
+cutoff_high = 23;   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
+
+
+% Compute the hybrid image (you supply this code)
+set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutoff_high);
+
+% Crop resulting image:  Crop the result to get rid of any unsightly borders areas.
+disp('input crop points (two opposite corners)');
+fig=figure; hold off, imagesc(set2_hybrid), axis image;
+figure(fig)
+% [x, y] = ginput(2);  x = round(x); y = round(y);
+close(fig);
+% Once you have these coordinates, comment the lines above, and 
+% hard code the values below.
+x = [171;584]; 
+y = [100;747];
+set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
+
+% Let us try to "simulate" what the hybrid image will look like
+% when viewed from afar.  Let us pad a black border around it
+% so it effectively shrinks in size when displayed in a montage.
+[h, w, ~] = size(set2_hybrid);
+viewed_from_afar = padarray(set2_hybrid, max(h, w));
+figure; montage({set2_near, set2_far, set2_hybrid, viewed_from_afar}, 'Size', [2,2]);
+
+
+
+%%
+% REPEAT ABOVE FOR IMAGE SET 3
+
+set2_far = im2double(imread('star-flower.jpeg')); 		        % "far" picture
+set2_near = im2double(imread('starfish.jpg')); 	    		% "near" picture
+% (Optional) convert images to grayscale
+% set2_far = rgb2gray(set2_far);                
+% set2_near = rgb2gray(set2_near);
+
+% Interactively get two pairs of points from each image to establish
+% alignment.
+% [x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+
+% Once you have these coordinates, comment out call to the interactive
+% function above and hard code the coordinates instead.
+x1 = [7.786676783004556e+02;3.467632776934751e+02];
+y1 = [5.527572078907435e+02;4.264294385432473e+02];
+x2 = [3.203626707132019e+02;1.728664643399090e+02]; 
+y2 = [4.354772382397570e+02;2.388156297420330e+02];
+
+[set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
+
+% Choose the cutoff frequencies for the low-pass and high-pass filters
+% CHOOSE CAREFULLY!  Values will depend on the images used!
+cutoff_low  = 10;   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
+cutoff_high = 1;   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
+
+
+% Compute the hybrid image (you supply this code)
+set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutoff_high);
+
+% Crop resulting image:  Crop the result to get rid of any unsightly borders areas.
+% disp('input crop points (two opposite corners)');
+% fig=figure; hold off, imagesc(set2_hybrid), axis image;
+% figure(fig)
+% [x, y] = ginput(2);  x = round(x); y = round(y);
+% close(fig);
+% Once you have these coordinates, comment the lines above, and 
+% hard code the values below.
+x = [209;602]; 
+y = [160;1088];
+set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
+
+% Let us try to "simulate" what the hybrid image will look like
+% when viewed from afar.  Let us pad a black border around it
+% so it effectively shrinks in size when displayed in a montage.
+[h, w, ~] = size(set2_hybrid);
+viewed_from_afar = padarray(set2_hybrid, max(h, w));
+figure; montage({set2_near, set2_far, set2_hybrid, viewed_from_afar}, 'Size', [2,2]);
+
+%%
+% REPEAT ABOVE FOR IMAGE SET 4
+
+set2_far = im2double(imread('kris.jpeg')); 		        % "far" picture
+set2_near = im2double(imread('montek.jpeg')); 	    		% "near" picture
+% (Optional) convert images to grayscale
+% set2_far = rgb2gray(set2_far);                
+% set2_near = rgb2gray(set2_near);
+
+% Interactively get two pairs of points from each image to establish
+% alignment.
+[x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+
+% Once you have these coordinates, comment out call to the interactive
+% function above and hard code the coordinates instead.
+% x1 = [2.509916540212444e+02;3.594226100151745e+02];
+% y1 = [2.846471927162365e+02;2.885197268588769e+02];
+% x2 = [1.843194233687405e+02;2.596107738998483e+02]; 
+% y2 = [1.473520485584219e+02;1.609180576631259e+02];
+
+[set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
+
+% Choose the cutoff frequencies for the low-pass and high-pass filters
+% CHOOSE CAREFULLY!  Values will depend on the images used!
+cutoff_low  = 15;   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
+cutoff_high = 13;   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
 
 
 % Compute the hybrid image (you supply this code)
@@ -115,7 +220,8 @@ figure(fig)
 close(fig);
 % Once you have these coordinates, comment the lines above, and 
 % hard code the values below.
-% x = [..]; y = [..];
+% x = [59;401]; 
+% y = [63;544];
 set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
 
 % Let us try to "simulate" what the hybrid image will look like
@@ -125,13 +231,103 @@ set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
 viewed_from_afar = padarray(set2_hybrid, max(h, w));
 figure; montage({set2_near, set2_far, set2_hybrid, viewed_from_afar}, 'Size', [2,2]);
 
-
-
-
-% REPEAT ABOVE FOR IMAGE SET 3
-% REPEAT ABOVE FOR IMAGE SET 4
+%%
 % REPEAT ABOVE FOR IMAGE SET 5
+set2_far = im2double(imread('heart-hands.jpeg')); 		        % "far" picture
+set2_near = im2double(imread('heart.png')); 	    		% "near" picture
+% (Optional) convert images to grayscale
+% set2_far = rgb2gray(set2_far);                
+% set2_near = rgb2gray(set2_near);
+
+% Interactively get two pairs of points from each image to establish
+% alignment.
+% [x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+
+% Once you have these coordinates, comment out call to the interactive
+% function above and hard code the coordinates instead.
+x1 = [5.599696509863428e+02;1.877056145675266e+02];
+y1 = [3.492625189681335e+02;1.061828528072837e+03];
+x2 = [6.349615384615386e+02;6.571153846153848e+02]; 
+y2 = [1.537307692307691e+02;5.192692307692307e+02];
+
+[set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
+
+% Choose the cutoff frequencies for the low-pass and high-pass filters
+% CHOOSE CAREFULLY!  Values will depend on the images used!
+cutoff_low  = 13;   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
+cutoff_high = 23;   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
+
+
+% Compute the hybrid image (you supply this code)
+set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutoff_high);
+
+% Crop resulting image:  Crop the result to get rid of any unsightly borders areas.
+% disp('input crop points (two opposite corners)');
+% fig=figure; hold off, imagesc(set2_hybrid), axis image;
+% figure(fig)
+% [x, y] = ginput(2);  x = round(x); y = round(y);
+% close(fig);
+% Once you have these coordinates, comment the lines above, and 
+% hard code the values below.
+x = [23;660]; 
+y = [69;632];
+set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
+
+% Let us try to "simulate" what the hybrid image will look like
+% when viewed from afar.  Let us pad a black border around it
+% so it effectively shrinks in size when displayed in a montage.
+[h, w, ~] = size(set2_hybrid);
+viewed_from_afar = padarray(set2_hybrid, max(h, w));
+figure; montage({set2_near, set2_far, set2_hybrid, viewed_from_afar}, 'Size', [2,2]);
+
+%%
 % REPEAT ABOVE FOR IMAGE SET 6
+set2_far = im2double(imread('dog.png')); 		        % "far" picture
+set2_near = im2double(imread('cat.png')); 	    		% "near" picture
+% (Optional) convert images to grayscale
+set2_far = rgb2gray(set2_far);                
+set2_near = rgb2gray(set2_near);
+
+% Interactively get two pairs of points from each image to establish
+% alignment.
+% [x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+
+% Once you have these coordinates, comment out call to the interactive
+% function above and hard code the coordinates instead.
+x1 = [2.930007587253415e+02;4.764423368740517e+02];
+y1 = [5.996760242792110e+02;5.578034901365706e+02];
+x2 = [4.724544764795146e+02;5.561995447647953e+02]; 
+y2 = [3.544226100151745e+02;3.045743550834600e+02];
+
+[set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
+
+% Choose the cutoff frequencies for the low-pass and high-pass filters
+% CHOOSE CAREFULLY!  Values will depend on the images used!
+cutoff_low  = 15;   % provide a value for the low-pass filter cutoff frequency (sigma of gaussian)
+cutoff_high = 27;   % provide a value for the high-pass filter cutoff frequency (sigma of gaussian)
+
+
+% Compute the hybrid image (you supply this code)
+set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutoff_high);
+
+% Crop resulting image:  Crop the result to get rid of any unsightly borders areas.
+% disp('input crop points (two opposite corners)');
+% fig=figure; hold off, imagesc(set2_hybrid), axis image;
+% figure(fig)
+% [x, y] = ginput(2);  x = round(x); y = round(y);
+% close(fig);
+% Once you have these coordinates, comment the lines above, and 
+% hard code the values below.
+x = [172;632]; 
+y = [224;647];
+set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
+
+% Let us try to "simulate" what the hybrid image will look like
+% when viewed from afar.  Let us pad a black border around it
+% so it effectively shrinks in size when displayed in a montage.
+[h, w, ~] = size(set2_hybrid);
+viewed_from_afar = padarray(set2_hybrid, max(h, w));
+figure; montage({set2_near, set2_far, set2_hybrid, viewed_from_afar}, 'Size', [2,2]);
 
 
 
