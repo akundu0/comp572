@@ -241,14 +241,14 @@ set2_near = im2double(imread('heart.png')); 	    		% "near" picture
 
 % Interactively get two pairs of points from each image to establish
 % alignment.
-% [x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
+[x1, y1, x2, y2] = get_points_interactively(set2_near, set2_far);
 
 % Once you have these coordinates, comment out call to the interactive
 % function above and hard code the coordinates instead.
-x1 = [5.599696509863428e+02;1.877056145675266e+02];
-y1 = [3.492625189681335e+02;1.061828528072837e+03];
-x2 = [6.349615384615386e+02;6.571153846153848e+02]; 
-y2 = [1.537307692307691e+02;5.192692307692307e+02];
+% x1 = [1.337245827010622e+02;42.987101669195766];
+% y1 = [86.883915022761755;2.605682852807283e+02];
+% x2 = [6.349615384615386e+02;6.534230769230770e+02]; 
+% y2 = [1.549615384615383e+02;5.204999999999999e+02];
 
 [set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
 
@@ -269,8 +269,8 @@ set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutof
 % close(fig);
 % Once you have these coordinates, comment the lines above, and 
 % hard code the values below.
-x = [23;660]; 
-y = [69;632];
+x = [20;350]; 
+y = [34;331];
 set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
 
 % Let us try to "simulate" what the hybrid image will look like
