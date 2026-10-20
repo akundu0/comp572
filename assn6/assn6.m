@@ -294,10 +294,10 @@ set2_near = rgb2gray(set2_near);
 
 % Once you have these coordinates, comment out call to the interactive
 % function above and hard code the coordinates instead.
-x1 = [2.930007587253415e+02;4.764423368740517e+02];
-y1 = [5.996760242792110e+02;5.578034901365706e+02];
-x2 = [4.724544764795146e+02;5.561995447647953e+02]; 
-y2 = [3.544226100151745e+02;3.045743550834600e+02];
+x1 = [64.570561456752628;1.037663125948407e+02];
+y1 = [1.322412746585735e+02;1.230955993930197e+02];
+x2 = [1.033308042488619e+02;1.220576631259484e+02]; 
+y2 = [77.802731411229075;66.915022761760184];
 
 [set2_near_aligned, set2_far_aligned] = align_images(set2_near, set2_far, x1, y1, x2, y2);
 
@@ -318,8 +318,8 @@ set2_hybrid = hybridImage(set2_far_aligned, set2_near_aligned, cutoff_low, cutof
 % close(fig);
 % Once you have these coordinates, comment the lines above, and 
 % hard code the values below.
-x = [172;632]; 
-y = [224;647];
+x = [38;133]; 
+y = [52;153];
 set2_hybrid = set2_hybrid(min(y):max(y), min(x):max(x), :);
 
 % Let us try to "simulate" what the hybrid image will look like
