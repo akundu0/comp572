@@ -1,13 +1,15 @@
 %%AI Usage Report
 %{
 1.  Which AI tool(s) you used:
-
+Claude (Anthropic), Sonnet 5.5
 2.  One or two example prompts:
-
+Write a third method, addressing the artifacts in these two preexisting
+methods.
 3.  What parts of the MATLAB code were AI-generated:
-
+The method 3 function.
 4.  What changes, debugging, or refinements you performed yourself:
-
+I adjusted the radius of each image, until the image had the desired
+effect.
 %}
 
 %{
@@ -20,6 +22,15 @@ to share.
 
 (Optional) Also mention if you obtained more compelling results by using a 
 different filter shape than a disk.
+
+Method 3 removes both artifacts from the baseline methods: the foreground no
+longer bleeds into the blurred background, and there is no dark halo along the
+subject's edge. The best results were the koi and lychee, where the subject is
+clearly separated from the background and my polygon follows the edge closely.
+I tuned the radius per image (6 for the portrait up to 20 for the dog) to get
+a noticeable blur without making the background unrecognizable. The dog is my
+failure case: its fuzzy fur does not match the hard polygon edge, so you can
+see a cutout look and a ring of unblurred background around the fur.
 
 %}
 
@@ -82,8 +93,20 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 % A simple disk filter is provided as default
 % For extra credit you may optionally define a different shape, e.g., hexagon, starburst, heart etc.
 
-radius = 13;            % choose this carefully for each image
-bokeh_shape = fspecial('disk', radius);
+radius = 20;            % choose this carefully for each image
+% bokeh_shape = fspecial('disk', radius);
+% result2 = method3(I, mask, bokeh_shape);
+% figure; montage({I, result2});
+
+% Starburst
+r = radius;
+n = 5;                                   % number of points
+ang = linspace(0, 2*pi, 2*n+1); ang(end) = [];
+rad = repmat([r, r*0.45], 1, n);         % outer, inner
+vx = rad.*cos(ang) + r + 1;
+vy = rad.*sin(ang) + r + 1;
+bokeh_shape = double(poly2mask(vx, vy, 2*r+1, 2*r+1));
+bokeh_shape = bokeh_shape / sum(bokeh_shape(:));
 
 result2 = method3(I, mask, bokeh_shape);
 
@@ -118,7 +141,7 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 radius = 13;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
-result2 = method3(I, mask, bokeh_shape);
+result3 = method3(I, mask, bokeh_shape);
 
 figure; montage({I, result2});
 
@@ -149,7 +172,7 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 radius = 6;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
-result2 = method3(I, mask, bokeh_shape);
+result4 = method3(I, mask, bokeh_shape);
 
 figure; montage({I, result2});
 
@@ -180,7 +203,7 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 radius = 20;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
-result2 = method3(I, mask, bokeh_shape);
+result5 = method3(I, mask, bokeh_shape);
 
 figure; montage({I, result2});
 
@@ -211,7 +234,7 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 radius = 10;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
-result2 = method3(I, mask, bokeh_shape);
+result6 = method3(I, mask, bokeh_shape);
 
 figure; montage({I, result2});
 
