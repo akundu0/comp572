@@ -143,12 +143,12 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 % A simple disk filter is provided as default
 % For extra credit you may optionally define a different shape, e.g., hexagon, starburst, heart etc.
 
-radius = 13;            % choose this carefully for each image
+radius = 14;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
 result3 = method3(I, mask, bokeh_shape);
 
-figure; montage({I, result2});
+figure; montage({I, result3});
 
 %%
 % REPEAT ABOVE FOR IMAGE 4
@@ -179,7 +179,7 @@ bokeh_shape = fspecial('disk', radius);
 
 result4 = method3(I, mask, bokeh_shape);
 
-figure; montage({I, result2});
+figure; montage({I, result4});
 
 %%
 % REPEAT ABOVE FOR IMAGE 5
@@ -210,7 +210,7 @@ bokeh_shape = fspecial('disk', radius);
 
 result5 = method3(I, mask, bokeh_shape);
 
-figure; montage({I, result2});
+figure; montage({I, result5});
 
 %%
 % REPEAT ABOVE FOR IMAGE 6
@@ -236,12 +236,12 @@ mask = poly2mask(poly_x, poly_y, size(I, 1), size(I, 2));
 % A simple disk filter is provided as default
 % For extra credit you may optionally define a different shape, e.g., hexagon, starburst, heart etc.
 
-radius = 10;            % choose this carefully for each image
+radius = 15;            % choose this carefully for each image
 bokeh_shape = fspecial('disk', radius);
 
 result6 = method3(I, mask, bokeh_shape);
 
-figure; montage({I, result2});
+figure; montage({I, result6});
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
