@@ -6,7 +6,8 @@ Claude (Anthropic), Sonnet 5.5
 Write a third method, addressing the artifacts in these two preexisting
 methods.
 3.  What parts of the MATLAB code were AI-generated:
-The method 3 function.
+The method 3 function and the starburst kernel change for the koi fish
+image (image 2)
 4.  What changes, debugging, or refinements you performed yourself:
 I adjusted the radius of each image, until the image had the desired
 effect.
@@ -31,6 +32,10 @@ I tuned the radius per image (6 for the portrait up to 20 for the dog) to get
 a noticeable blur without making the background unrecognizable. The dog is my
 failure case: its fuzzy fur does not match the hard polygon edge, so you can
 see a cutout look and a ring of unblurred background around the fur.
+
+For the koi image I used a 5-point starburst kernel (radius 20) instead of a
+disk. The starburst gave subtle star-shaped highlights on the water, which gave a
+more interesting result than the plain disk blur.
 
 %}
 
